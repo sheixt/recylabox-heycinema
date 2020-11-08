@@ -9,24 +9,32 @@ import {
 } from 'react-native'
 
 import branding from '../branding'
+import {useMoviesDispatch, useMoviesState} from '../utils/movies-context'
 import Card from './Card'
 
-const SearchForm: React.FC<{placeholder: string}> = ({placeholder}) => {
+const SearchForm: React.FC<{
+  placeholder: string
+}> = ({placeholder}) => {
   const {colors} = branding
+  const {status} = useMoviesState()
+  const dispatch = useMoviesDispatch()
   const [title, setTitle] = useState('')
-  const search = () => console.log(title)
-
+  const search = () => dispatch({type: 'searchTerm', payload: title})
   return (
     <View style={styles.container}>
       <Card padding={['small', 'small', 'small', 'small']}>
         <View style={styles.form}>
           <TextInput
             placeholder={placeholder}
-            onChangeText={input => setTitle(input)}
+            onChangeText={input => setTitle(input.trim())}
             defaultValue={title}
             style={styles.input}
           />
-          <TouchableOpacity onPress={search} style={styles.button}>
+          <TouchableOpacity
+            onPress={search}
+            style={styles.button}
+            disabled={status === 'pending'}
+          >
             <Ionicons
               name="md-search"
               size={32}

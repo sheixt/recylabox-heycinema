@@ -6,8 +6,8 @@ import {StyleSheet, View, ViewStyle} from 'react-native'
 
 import branding from './branding'
 import Header from './components/Header'
-import MovieList from './components/MovieList'
-import SearchForm from './components/SearchForm'
+import SearchMovies from './components/SearchMovies'
+import {MoviesProvider} from './utils/movies-context'
 
 const App: React.FC = () => {
   const [fontsLoaded] = useFonts({
@@ -23,8 +23,9 @@ const App: React.FC = () => {
   return (
     <View style={styles.container}>
       <Header />
-      <SearchForm placeholder="Search for a movie title" />
-      <MovieList headline="Movie results:" />
+      <MoviesProvider>
+        <SearchMovies />
+      </MoviesProvider>
       <StatusBar style="auto" />
     </View>
   )

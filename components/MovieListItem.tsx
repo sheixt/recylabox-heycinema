@@ -1,28 +1,16 @@
 import React from 'react'
-import {
-  Image,
-  ImageStyle,
-  StyleSheet,
-  Text,
-  View,
-  ViewStyle,
-} from 'react-native'
+import {Image, ImageStyle, StyleSheet, View, ViewStyle} from 'react-native'
 
 import branding from '../branding'
+import {Movie} from '../utils/types'
 import Card from './Card'
 import MovieMeta from './MovieMeta'
 
-interface Movie {
-  title: string
-  image?: string
-  rating: number
-  year: number
-}
-
 const MovieListItem: React.FC<Movie> = ({image, ...rest}) => {
-  const imageSrc: string = image
-    ? image
-    : `https://images.unsplash.com/photo-1478720568477-152d9b164e26?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80`
+  const imageSrc: string =
+    image && image !== 'N/A'
+      ? image
+      : `https://images.unsplash.com/photo-1478720568477-152d9b164e26?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80`
   return (
     <View style={styles.container}>
       <Card>
@@ -47,12 +35,14 @@ interface Styles {
 }
 
 const {
-  spacing: {small, medium, large},
+  spacing: {small, medium},
 } = branding
 
 const styles = StyleSheet.create<Styles>({
   container: {
-    marginBottom: large,
+    paddingLeft: medium,
+    paddingRight: medium,
+    paddingBottom: medium,
   },
   item: {
     display: 'flex',
@@ -60,8 +50,8 @@ const styles = StyleSheet.create<Styles>({
     alignItems: 'center',
   },
   image: {
-    height: 100,
-    width: 100,
+    height: 120,
+    width: 120,
     maxWidth: '100%',
     borderTopLeftRadius: small,
     borderBottomLeftRadius: small,

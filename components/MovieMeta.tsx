@@ -5,8 +5,8 @@ import branding from '../branding'
 
 interface Meta {
   title: string
-  rating: number
-  year: number
+  rating: string
+  year: string
 }
 
 const MovieMeta: React.FC<Meta> = ({title, rating, year}) => {

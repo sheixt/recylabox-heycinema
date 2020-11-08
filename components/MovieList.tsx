@@ -1,17 +1,41 @@
 import React from 'react'
-import {StyleSheet, Text, TextStyle, View, ViewStyle} from 'react-native'
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native'
 
 import branding from '../branding'
+import {useMoviesState} from '../utils/movies-context'
 import MovieListItem from './MovieListItem'
 
+interface Movie {
+  imdbID: string
+  Title: string
+  Year: string
+  Poster: string
+}
+
 const MovieList: React.FC<{headline: string}> = ({headline}) => {
+  const {movies} = useMoviesState()
   return (
     <View style={styles.container}>
       <Text style={styles.headline}>{headline}</Text>
-      <MovieListItem
-        title="A really long Movie Title Goes here"
-        year={2001}
-        rating={8}
+      <FlatList
+        contentContainerStyle={{paddingBottom: 200}}
+        keyExtractor={({imdbID}) => imdbID}
+        data={movies}
+        renderItem={({item}: {item: Movie}) => (
+          <MovieListItem
+            title={item.Title}
+            year={item.Year}
+            image={item.Poster}
+            rating={(8).toString()}
+          />
+        )}
       />
     </View>
   )
@@ -25,12 +49,12 @@ interface Styles {
 const styles = StyleSheet.create<Styles>({
   container: {
     width: '100%',
-    paddingLeft: branding.spacing.medium,
-    paddingRight: branding.spacing.medium,
     paddingBottom: branding.spacing.large,
   },
   headline: {
     ...branding.typography.h2,
+    paddingLeft: branding.spacing.medium,
+    paddingRight: branding.spacing.medium,
     marginBottom: branding.spacing.small,
   },
 })
