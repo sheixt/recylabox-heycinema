@@ -1,6 +1,7 @@
 import {Ionicons} from '@expo/vector-icons'
-import React, {useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {
+  Animated,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -20,29 +21,66 @@ const SearchForm: React.FC<{
   const dispatch = useMoviesDispatch()
   const [title, setTitle] = useState('')
   const search = () => dispatch({type: 'searchTerm', payload: title})
+
+  const scaleAnim = useRef(new Animated.Value(0)).current
+  const pulse = () =>
+    Animated.loop(
+      Animated.sequence([
+        Animated.delay(300),
+        Animated.timing(scaleAnim, {
+          toValue: 1.03,
+          duration: 250,
+          useNativeDriver: true,
+        }),
+        Animated.timing(scaleAnim, {
+          toValue: 1,
+          duration: 100,
+          useNativeDriver: true,
+        }),
+      ]),
+      {
+        iterations: 3,
+      },
+    ).start()
+
+  useEffect(() => {
+    if (status === 'idle') {
+      pulse()
+    }
+  }, [status])
+
   return (
     <View style={styles.container}>
-      <Card padding={['small', 'small', 'small', 'small']}>
-        <View style={styles.form}>
-          <TextInput
-            placeholder={placeholder}
-            onChangeText={input => setTitle(input.trim())}
-            defaultValue={title}
-            style={styles.input}
-          />
-          <TouchableOpacity
-            onPress={search}
-            style={styles.button}
-            disabled={status === 'pending'}
-          >
-            <Ionicons
-              name="md-search"
-              size={32}
-              color={title.length ? colors.primary : colors.lightGrey}
+      <Animated.View
+        style={[
+          {
+            scaleX: scaleAnim,
+            scaleY: scaleAnim,
+          },
+        ]}
+      >
+        <Card padding={['small', 'small', 'small', 'small']}>
+          <View style={styles.form}>
+            <TextInput
+              placeholder={placeholder}
+              onChangeText={input => setTitle(input.trim())}
+              defaultValue={title}
+              style={styles.input}
             />
-          </TouchableOpacity>
-        </View>
-      </Card>
+            <TouchableOpacity
+              onPress={search}
+              style={styles.button}
+              disabled={status === 'pending'}
+            >
+              <Ionicons
+                name="md-search"
+                size={32}
+                color={title.length ? colors.primary : colors.lightGrey}
+              />
+            </TouchableOpacity>
+          </View>
+        </Card>
+      </Animated.View>
     </View>
   )
 }
@@ -69,7 +107,6 @@ const styles = StyleSheet.create<Styles>({
   input: {
     height: 40,
     flexGrow: 1,
-    ...branding.typography.body,
   },
   button: {
     height: 40,
