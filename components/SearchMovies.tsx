@@ -19,7 +19,7 @@ const SearchMovies: React.FC = () => {
 
   return (
     <>
-      <SearchForm placeholder="Search for a movie title" />
+      <SearchForm placeholder="Search (e.g. Batman)" />
       <Movies />
     </>
   )
