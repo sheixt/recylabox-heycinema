@@ -1,8 +1,9 @@
 import {AppLoading} from 'expo'
+import {LinearGradient} from 'expo-linear-gradient'
 import {useFonts} from 'expo-font'
 import {StatusBar} from 'expo-status-bar'
 import React from 'react'
-import {StyleSheet, View, ViewStyle} from 'react-native'
+import {Dimensions, StyleSheet, View, ViewStyle} from 'react-native'
 
 import branding from './branding'
 import Header from './components/Header'
@@ -20,8 +21,22 @@ const App: React.FC = () => {
     return <AppLoading />
   }
 
+  const {height} = Dimensions.get('screen')
+
   return (
     <View style={styles.container}>
+      <LinearGradient
+        start={[0, 0]}
+        end={[1, 1]}
+        colors={[branding.colors.primary, branding.colors.secondary]}
+        style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          top: 0,
+          height,
+        }}
+      />
       <Header />
       <MoviesProvider>
         <SearchMovies />
