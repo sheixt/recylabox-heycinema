@@ -1,6 +1,6 @@
 import {AppLoading} from 'expo'
-import {LinearGradient} from 'expo-linear-gradient'
 import {useFonts} from 'expo-font'
+import {LinearGradient} from 'expo-linear-gradient'
 import {StatusBar} from 'expo-status-bar'
 import React from 'react'
 import {Dimensions, StyleSheet, View, ViewStyle} from 'react-native'
