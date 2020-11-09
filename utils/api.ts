@@ -20,3 +20,24 @@ export function fetchMovies(title: string) {
     },
   )
 }
+
+export function fetchMovieDetails(id: string) {
+  return fetch(
+    `http://www.omdbapi.com/?apikey=da0bfa12&i=${id}&plot=full`,
+  ).then(async response => {
+    const data = await response.json()
+    if (response.ok) {
+      const movie = data
+      if (movie) {
+        return movie
+      } else {
+        return Promise.reject(new Error(`No movie found with the name "${id}"`))
+      }
+    } else {
+      const error = {
+        message: data?.Error,
+      }
+      return Promise.reject(error)
+    }
+  })
+}

@@ -5,30 +5,28 @@ import branding from '../branding'
 
 const Logo: React.FC = () => {
   return (
-    <View style={styles.container}>
+    <>
       <Text style={styles.hey}>hey</Text>
       <Text style={styles.cinema}>cinema</Text>
-    </View>
+    </>
   )
 }
 
 interface Styles {
-  container: ViewStyle
   hey: TextStyle
   cinema: TextStyle
 }
 
 const styles = StyleSheet.create<Styles>({
-  container: {
-    paddingTop: branding.spacing.medium,
-  },
   hey: {
     ...branding.typography.h1,
     color: branding.colors.primary,
+    textAlign: 'center',
   },
   cinema: {
     ...branding.typography.h1,
     color: branding.colors.secondary,
+    textAlign: 'center',
   },
 })
 

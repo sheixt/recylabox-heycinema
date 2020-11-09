@@ -1,7 +1,7 @@
 import React, {createContext, useReducer, useContext} from 'react'
-import {fetchMovies} from './api'
 
-import {Movie, MovieState} from './types'
+import {fetchMovies} from './api'
+import {Movie, MoviesState} from './types'
 
 type Dispatch = (action: Action) => void
 type MoviesProviderProps = {children: React.ReactNode}
@@ -17,10 +17,10 @@ const defaultState = {
   error: null,
 }
 
-const MoviesStateContext = createContext<MovieState | undefined>(undefined)
+const MoviesStateContext = createContext<MoviesState | undefined>(undefined)
 const MoviesDispatchContext = createContext<Dispatch | undefined>(undefined)
 
-function moviesReducer(state: MovieState, action: Action) {
+function moviesReducer(state: MoviesState, action: Action) {
   switch (action.type) {
     case 'searchTerm': {
       return {...state, searchTerm: action.payload}

@@ -3,7 +3,7 @@ import {Text} from 'react-native'
 
 import {useMoviesState} from '../utils/movies-context'
 import MovieList from './MovieList'
-import Warning from './Notice'
+import Notice from './Notice'
 
 const Movies: React.FC = () => {
   const {status, searchTerm, error} = useMoviesState()
@@ -11,7 +11,7 @@ const Movies: React.FC = () => {
     return <Text>Please search for a movie by it's title</Text>
   } else if (status === 'rejected') {
     return (
-      <Warning
+      <Notice
         message={
           error && error.message ? error.message : 'Something went wrong'
         }

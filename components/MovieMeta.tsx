@@ -1,22 +1,18 @@
 import React from 'react'
-import {StyleSheet, Text, TextStyle, View, ViewStyle} from 'react-native'
+import {StyleSheet, Text, TextStyle, ViewStyle} from 'react-native'
 
 import branding from '../branding'
 
 interface Meta {
   title: string
-  rating: string
   year: string
 }
 
-const MovieMeta: React.FC<Meta> = ({title, rating, year}) => {
+const MovieMeta: React.FC<Meta> = ({title, year}) => {
   return (
     <>
+      <Text style={styles.year}>{year}</Text>
       <Text style={styles.title}>{title}</Text>
-      <View style={styles.meta}>
-        <Text style={styles.year}>{year}</Text>
-        <Text style={styles.rating}>{rating}/10</Text>
-      </View>
     </>
   )
 }

@@ -33,7 +33,7 @@ const MovieList: React.FC<{headline: string}> = ({headline}) => {
             title={item.Title}
             year={item.Year}
             image={item.Poster}
-            rating={(8).toString()}
+            imdbID={item.imdbID}
           />
         )}
       />

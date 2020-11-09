@@ -1,28 +1,42 @@
+import {useNavigation} from '@react-navigation/native'
 import React from 'react'
-import {Image, ImageStyle, StyleSheet, View, ViewStyle} from 'react-native'
+import {
+  Image,
+  ImageStyle,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native'
+import {TouchableOpacity} from 'react-native-gesture-handler'
 
 import branding from '../branding'
+import {imageWithFallback} from '../utils'
 import {Movie} from '../utils/types'
 import Card from './Card'
 import MovieMeta from './MovieMeta'
 
 const MovieListItem: React.FC<Movie> = ({image, ...rest}) => {
-  const imageSrc: string =
-    image && image !== 'N/A'
-      ? image
-      : `https://images.unsplash.com/photo-1478720568477-152d9b164e26?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80`
+  const imageSrc: string = imageWithFallback(image)
+  const navigation = useNavigation()
   return (
     <View style={styles.container}>
-      <Card>
-        <View style={styles.item}>
-          <View style={{flex: 1}}>
-            <Image style={styles.image} source={{uri: imageSrc}} />
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Details', {id: rest.imdbID})}
+      >
+        <Card>
+          <View style={styles.item}>
+            <View style={{flex: 1}}>
+              <Image style={styles.image} source={{uri: imageSrc}} />
+            </View>
+            <View style={styles.meta}>
+              <MovieMeta {...rest} />
+              <Text style={styles.link}>More details ►</Text>
+            </View>
           </View>
-          <View style={styles.meta}>
-            <MovieMeta {...rest} />
-          </View>
-        </View>
-      </Card>
+        </Card>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -32,10 +46,12 @@ interface Styles {
   item: ViewStyle
   image: ImageStyle
   meta: ViewStyle
+  link: TextStyle
 }
 
 const {
   spacing: {small, medium},
+  colors,
 } = branding
 
 const styles = StyleSheet.create<Styles>({
@@ -62,6 +78,12 @@ const styles = StyleSheet.create<Styles>({
     paddingBottom: small,
     paddingLeft: medium,
     flex: 2,
+  },
+  link: {
+    marginTop: small,
+    fontSize: 18,
+    lineHeight: 20,
+    color: colors.secondary,
   },
 })
 
