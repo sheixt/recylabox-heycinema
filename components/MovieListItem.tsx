@@ -17,8 +17,8 @@ import {Movie} from '../utils/types'
 import Card from './Card'
 import MovieMeta from './MovieMeta'
 
-const MovieListItem: React.FC<Movie> = ({image, ...rest}) => {
-  const imageSrc: string = imageWithFallback(image)
+const MovieListItem: React.FC<Movie> = ({Poster, ...rest}) => {
+  const imageSrc: string = imageWithFallback(Poster)
   const navigation = useNavigation()
   return (
     <View style={styles.container}>

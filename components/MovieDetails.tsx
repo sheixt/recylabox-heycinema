@@ -59,7 +59,7 @@ const MovieDetails: React.FC = () => {
       <ScrollView>
         <Image source={{uri: imageSrc}} style={{width, height: height / 3}} />
         <View style={styles.container}>
-          <MovieMeta title={Title} year={Year} />
+          <MovieMeta Title={Title} Year={Year} />
           {Ratings ? (
             <View style={styles.ratings}>
               {Ratings.map((item: Rating, index: number) => (

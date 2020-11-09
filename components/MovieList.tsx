@@ -30,9 +30,9 @@ const MovieList: React.FC<{headline: string}> = ({headline}) => {
         data={movies}
         renderItem={({item}: {item: Movie}) => (
           <MovieListItem
-            title={item.Title}
-            year={item.Year}
-            image={item.Poster}
+            Title={item.Title}
+            Year={item.Year}
+            Poster={item.Poster}
             imdbID={item.imdbID}
           />
         )}
