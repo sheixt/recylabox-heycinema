@@ -110,6 +110,7 @@ const {
 
 const styles = StyleSheet.create<Styles>({
   container: {
+    maxWidth: '100%',
     paddingLeft: medium,
     paddingRight: medium,
     paddingBottom: medium,
