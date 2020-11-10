@@ -19,12 +19,12 @@ const App: React.FC = () => {
     return <AppLoading />
   }
 
-  const Stack = createStackNavigator()
+  const {Navigator, Screen} = createStackNavigator()
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
+      <Navigator initialRouteName="Home">
+        <Screen
           name="Home"
           component={HomeScreen}
           options={{
@@ -32,7 +32,7 @@ const App: React.FC = () => {
             headerTitleAlign: 'center',
           }}
         />
-        <Stack.Screen
+        <Screen
           name="Details"
           component={MovieInfo}
           options={{
@@ -40,7 +40,7 @@ const App: React.FC = () => {
             headerTitleAlign: 'center',
           }}
         />
-      </Stack.Navigator>
+      </Navigator>
     </NavigationContainer>
   )
 }
