@@ -12,8 +12,12 @@ interface Meta {
 const MovieMeta: React.FC<Meta> = ({Title, Year}) => {
   return (
     <>
-      <Text style={styles.year}>{Year}</Text>
-      <Text style={styles.title}>{Title}</Text>
+      <Text style={styles.year} accessibilityLabel="Year of release">
+        {Year}
+      </Text>
+      <Text style={styles.title} accessibilityLabel="Title">
+        {Title}
+      </Text>
     </>
   )
 }

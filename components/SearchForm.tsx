@@ -68,6 +68,7 @@ const SearchForm: React.FC<{
               style={styles.input}
             />
             <TouchableOpacity
+              testID="searchForm-button"
               onPress={search}
               style={styles.button}
               disabled={status === 'pending'}

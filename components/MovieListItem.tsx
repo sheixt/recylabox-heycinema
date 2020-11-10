@@ -28,7 +28,11 @@ const MovieListItem: React.FC<Movie> = ({Poster, ...rest}) => {
         <Card>
           <View style={styles.item}>
             <View style={{flex: 1}}>
-              <Image style={styles.image} source={{uri: imageSrc}} />
+              <Image
+                style={styles.image}
+                source={{uri: imageSrc}}
+                testID="MovieListItem-image"
+              />
             </View>
             <View style={styles.meta}>
               <MovieMeta {...rest} />
